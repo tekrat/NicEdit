@@ -60,14 +60,8 @@ var bkElement = bkClass.extend({
   pos: function() {
     var curleft = curtop = 0;
     var o = obj = this;
-    if (obj.offsetParent) {
-      do {
-        curleft += obj.offsetLeft;
-        curtop += obj.offsetTop;
-      } while (obj = obj.offsetParent);
-    }
-    var b = (!window.opera) ? parseInt(this.getStyle('border-width') || this.style.border, 10) || 0 : 0;
-    return [curleft + b, curtop + b + this.offsetHeight];
+    var rect = o.getBoundingClientRect();
+    return [rect.left, rect.top + (rect.bottom - rect.top)];
   },
 
   noSelect: function() {
